@@ -35,14 +35,17 @@ module.exports = app => {
     const model = await req.Model.findById(req.params.id)
     res.send(model)
   })
-
+  //CRUD通用接口，实现原理：
+  //  1.通过:resource接收自定义参数(对应模型)
+  //  2.编写中间件，将接收到自定义参数后通过infletion模块转换模型名称(转换成类名形式，首字母大写、去除复数)
+  //  3.将自定的接口地址发送给express.Router
   app.use('/admin/api/rest/:resource', async (req,res,next)=>{
     const modelName = require('inflection').classify(req.params.resource)
     console.log(modelName);
     req.Model = require(`../../models/${modelName}`)
     next()
   } , router)
-
+  //文件上传接口
   const multer= require('multer')
   const upload = multer({dest: __dirname + '/../../uploads'})
   app.post('/admin/api/upload', upload.single('file'), async (req,res)=>{
