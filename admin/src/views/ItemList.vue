@@ -6,6 +6,7 @@
       <el-table-column prop="name" label="物品名称"></el-table-column>
       <el-table-column prop="icon" label="物品图标">
         <template v-slot="rowData">
+          <!-- 当使用elementUI的template时 可以往里面自定义很多东西 例如下方的图片 如果直接在el-table-column修改prop属性并不能显示图片，只会显示图片地址 -->
           <img :src="rowData.row.icon" style="height: 3rem;">
         </template>
       </el-table-column>

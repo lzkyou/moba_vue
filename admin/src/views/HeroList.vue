@@ -1,22 +1,23 @@
 <template>
   <div>
-    <h1>物品列表</h1>
+    <h1>英雄列表</h1>
     <el-table :data="items">
       <el-table-column prop="_id" label="ID" width="230"></el-table-column>
-      <el-table-column prop="name" label="物品名称"></el-table-column>
-      <el-table-column prop="icon" label="物品图标">
+      <el-table-column prop="name" label="英雄名称"></el-table-column>
+      <el-table-column prop="avatar" label="英雄头像">
+        <!-- 当使用elementUI的template时 可以往里面自定义很多东西 例如下方的图片 如果直接在el-table-column修改prop属性并不能显示图片，只会显示图片地址 -->
         <template v-slot="rowData">
-          <img :src="rowData.row.icon" style="height: 3rem;">
+          <img :src="rowData.row.avatar" style="height: 3rem" />
         </template>
       </el-table-column>
+      <el-table-column prop="title" label="英雄称号"></el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template v-slot="rowData">
           <el-button
             type="primary"
             size="small"
-            @click="$router.push(`/items/edit/${rowData.row._id}`)"
-            >编辑</el-button
-          >
+            @click="$router.push(`/heros/edit/${rowData.row._id}`)"
+            >编辑</el-button>
           <el-button type="danger" size="small" @click="remove(rowData.row)"
             >删除</el-button
           >
@@ -35,7 +36,7 @@ export default {
   },
   methods: {
     async fetch() {
-      const res = await this.$http.get("rest/items");
+      const res = await this.$http.get("rest/heros");
       this.items = res.data;
     },
     async remove(row) {
@@ -44,7 +45,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning",
       }).then(async () => {
-        await this.$http.delete(`rest/items/${row._id}`);
+        await this.$http.delete(`rest/heros/${row._id}`);
         this.$message({
           type: "success",
           message: "删除成功!",
