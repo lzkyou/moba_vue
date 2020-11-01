@@ -1,3 +1,4 @@
+//package.json 里面的serve配置启动项 通过nodemon启动当前index.js页面
 const express = require('express')
 const app = express()
 

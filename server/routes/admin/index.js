@@ -45,12 +45,13 @@ module.exports = app => {
     req.Model = require(`../../models/${modelName}`)
     next()
   } , router)
-  //文件上传接口
+  //图片上传接口 利用multer模块创建上传地址
   const multer= require('multer')
   const upload = multer({dest: __dirname + '/../../uploads'})
   app.post('/admin/api/upload', upload.single('file'), async (req,res)=>{
     const file = req.file
     file.url = `http://localhost:3000/uploads/${file.filename}`
+    //直接返回图片的url到前端
     res.send(file.url)
   })
 }
