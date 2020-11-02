@@ -1,12 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from 'views/Main.vue'
+
 import CategoryEdit from 'views/CategoryEdit.vue'
 import CategoryList from 'views/CategoryList.vue'
+
 import ItemEdit from 'views/ItemEdit.vue'
 import ItemList from 'views/ItemList.vue'
+
 import HeroEdit from 'views/HeroEdit.vue'
 import HeroList from 'views/HeroList.vue'
+
+import ArticleEdit from 'views/ArticleEdit.vue'
+import ArticleList from 'views/ArticleList.vue'
+
+import AdEdit from 'views/AdEdit.vue'
+import AdList from 'views/AdList.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +37,14 @@ const routes = [
       { path: '/heros/create', component: HeroEdit },
       { path: '/heros/edit/:id', component: HeroEdit, props: true },
       { path: '/heros/list', component: HeroList },
+      //Aricle
+      { path: '/articles/create', component: ArticleEdit },
+      { path: '/articles/edit/:id', component: ArticleEdit, props: true },
+      { path: '/articles/list', component: ArticleList },
+      //ADs
+      { path: '/ads/create', component: AdEdit },
+      { path: '/ads/edit/:id', component: AdEdit, props: true },
+      { path: '/ads/list', component: AdList },
     ]
   },
 ]
