@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 
+app.set('secret','lzkyou')
 //cors插件解决跨域 问题
 app.use(require('cors')())
 //json文件分析Expressv4.16.0后内置

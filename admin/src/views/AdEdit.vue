@@ -10,7 +10,7 @@
           <i class="el-icon-plus">添加项</i>
         </el-button>
         <el-row type="flex" style="flex-wrap: wrap">
-          <el-col :md="12" v-for="(item, index) in model.items" :key="index">
+          <el-col :md="24" v-for="(item, index) in model.items" :key="index">
             <el-form-item label="广告跳转链接">
               <el-input v-model="item.url"></el-input>
             </el-form-item>
@@ -26,7 +26,7 @@
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </el-form-item>
-            <el-form-item align="center">
+            <el-form-item align="right" style="margin-bottom: 20px;">
               <el-button size="mini" type="danger" @click="removeItem(index)">
                 删除项
               </el-button>
@@ -50,8 +50,10 @@ export default {
   },
   data() {
     return {
-      model: {},
-      items: [],
+      model: {
+        items: [],
+      },
+      
     };
   },
   methods: {
@@ -76,7 +78,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning",
       }).then(() => {
-        this.model.skills.splice(index, 1);
+        this.model.items.splice(index, 1);
         this.$message({
           type: "success",
           message: "删除成功!",

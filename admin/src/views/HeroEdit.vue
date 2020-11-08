@@ -115,13 +115,12 @@
           <el-button type="text" size="mini" @click="model.skills.push({})">
             <i class="el-icon-plus">添加技能</i>
           </el-button>
-          <el-row type="flex" style="flex-wrap: wrap">
+          <el-row type="flex" style="flex-wrap: wrap;">
             <el-col :md="12" v-for="(item, index) in model.skills" :key="index">
               <el-form-item label="技能名称">
                 <el-input v-model="item.name"></el-input>
               </el-form-item>
               <el-form-item label="图标">
-                <!-- on-success事件触发后后端send回前端resolve -->
                 <el-upload
                   class="avatar-uploader"
                   :action="$http.defaults.baseURL + '/upload'"
@@ -137,15 +136,6 @@
               </el-form-item>
               <el-form-item label="小提示">
                 <el-input type="textarea" v-model="item.tips"></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-button
-                  size="mini"
-                  type="danger"
-                  @click="removeSkill(index)"
-                >
-                  删除技能
-                </el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -201,8 +191,7 @@ export default {
     //获取hero模型数据并在VMDOM创建时调用此方法
     async fetch() {
       const res = await this.$http.get(`rest/heros/${this.id}`);
-      //使用Object.assign()创建一个空对象(target)后，将this.model和res.data(...sources)相同的键会被覆盖。
-      this.model = Object.assign({}, this.model, res.data);
+      this.model = Object.assign({}, this.model, res.data); //使用Object.assign()创建一个空对象(target)后，将this.model和res.data(...sources)相同的键会被覆盖。
     },
     //获取categories模型数据并在VMDOM创建时调用此方法
     async fetchCategories() {
@@ -214,19 +203,6 @@ export default {
       const res = await this.$http.get("rest/items");
       this.items = res.data;
     },
-    removeSkill(index) {
-      this.$confirm("是否删除该技能?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      }).then(() => {
-        this.model.skills.splice(index, 1);
-        this.$message({
-          type: "success",
-          message: "删除成功!",
-        });
-      });
-    },
   },
   created() {
     this.fetchItems();
@@ -236,31 +212,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 h1 {
   margin-bottom: 20px;
-}
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 98px;
-  height: 98px;
-  line-height: 98px;
-  text-align: center;
-}
-.avatar {
-  width: 98px;
-  height: 98px;
-  display: block;
 }
 </style>
