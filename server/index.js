@@ -12,6 +12,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'))
 
 require('./routes/admin')(app);
 require('./database/db')(app);
+require('./routes/web')(app);
 
 app.listen(3000,()=>{
   console.log('listening on port 3000!');

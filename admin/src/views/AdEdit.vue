@@ -18,7 +18,8 @@
               <!-- on-success事件触发后后端send回前端resolve -->
               <el-upload
                 class="avatar-uploader"
-                :action="$http.defaults.baseURL + '/upload'"
+                :action="uploadUrl"
+                :headers="getAuthHeaders()"
                 :show-file-list="false"
                 :on-success="(url) => $set(item, 'image', url)"
               >
@@ -26,7 +27,7 @@
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </el-form-item>
-            <el-form-item align="right" style="margin-bottom: 20px;">
+            <el-form-item align="right" style="margin-bottom: 20px">
               <el-button size="mini" type="danger" @click="removeItem(index)">
                 删除项
               </el-button>
@@ -53,7 +54,6 @@ export default {
       model: {
         items: [],
       },
-      
     };
   },
   methods: {

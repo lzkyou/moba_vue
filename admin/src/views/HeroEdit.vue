@@ -98,7 +98,8 @@
           <el-form-item label="头像">
             <el-upload
               class="avatar-uploader"
-              :action="$http.defaults.baseURL + '/upload'"
+              :action="uploadUrl"
+              :headers="getAuthHeaders()"
               :show-file-list="false"
               :on-success="afterUpload"
             >
@@ -115,7 +116,7 @@
           <el-button type="text" size="mini" @click="model.skills.push({})">
             <i class="el-icon-plus">添加技能</i>
           </el-button>
-          <el-row type="flex" style="flex-wrap: wrap;">
+          <el-row type="flex" style="flex-wrap: wrap">
             <el-col :md="12" v-for="(item, index) in model.skills" :key="index">
               <el-form-item label="技能名称">
                 <el-input v-model="item.name"></el-input>
@@ -123,7 +124,8 @@
               <el-form-item label="图标">
                 <el-upload
                   class="avatar-uploader"
-                  :action="$http.defaults.baseURL + '/upload'"
+                  :action="uploadUrl"
+                  :headers="getAuthHeaders()"
                   :show-file-list="false"
                   :on-success="(url) => $set(item, 'icon', url)"
                 >

@@ -27,13 +27,14 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    meta: { isPublic: true }
   },
   {
     path: '/',
     name: 'Main',
     component: Main,
-    children:[
+    children: [
       //category
       { path: '/categories/create', component: CategoryEdit },
       { path: '/categories/edit/:id', component: CategoryEdit, props: true },
@@ -66,5 +67,10 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to,from,next)=>{
+  if(!to.meta.isPublic && !localStorage.token)
+    return next('/login')
+  next()
+})
 export default router
 

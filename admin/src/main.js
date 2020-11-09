@@ -9,6 +9,22 @@ import './Style.css'
 Vue.config.productionTip = false
 Vue.prototype.$http = http
 
+//全局混入
+Vue.mixin({
+  computed:{
+    uploadUrl(){
+      return this.$http.defaults.baseURL + '/upload'
+    }
+  },
+  methods:{
+    getAuthHeaders(){
+      return {
+        Authorization: `Bearer ${localStorage.token || ''}`
+      }
+    }
+  }
+})
+
 new Vue({
   router,
   render: h => h(App)
