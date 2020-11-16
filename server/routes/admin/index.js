@@ -33,7 +33,7 @@ module.exports = app => {
       queryOptions.populate = 'parent'
     }
     //get获取集合(表)数据limit为10条
-    const items = await req.Model.find().setOptions(queryOptions).limit(10)
+    const items = await req.Model.find().setOptions(queryOptions).limit(100)
     res.send(items)
   })
 

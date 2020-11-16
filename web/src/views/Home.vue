@@ -32,23 +32,40 @@
     <!-- 卡片 -->
     <m-list-card icon="cc-menu-circle" title="新闻资讯" :categories="newsCates">
       <template #items="{ category }">
-        <div class="py-2 flex" v-for="(item,index) in category.newsList" :key="index">
-          <span>[{{item.categoryName}}]</span>
+        <router-link tag="div" :to="`/articles/${item._id}`" class="py-2 flex fs-lg" v-for="(item,index) in category.newsList" :key="index">
+          <span class="text-grey">[{{item.categoryName}}]</span>
           <span class="px-1">|</span>
-          <span class="flex-1">{{item.title}}</span>
-          <span>{{item.date}}</span>
+          <span class="flex-1 pr-1 text-ellipsis">{{item.title}}</span>
+          <span class="text-grey">{{item.createdAt | dateShortCut}}</span>
+        </router-link>
+      </template>
+    </m-list-card>
+
+    <m-list-card icon="1590151135_1_" title="英雄列表" :categories="heroCates">
+      <template #items="{ category }">
+        <div class="flex flex-wrap" style="margin: 0 -.5rem">
+          <div class="p-2 text-center" style="width: 20%;" v-for="(item,index) in category.heroList" :key="index">
+            <img :src="item.avatar" class="w-100">
+            <div>{{item.name}}</div>
+         </div>
         </div>
       </template>
     </m-list-card>
 
-    <m-card icon="cc-menu-circle" title="英雄列表"></m-card>
     <m-card icon="cc-menu-circle" title="精选视频"></m-card>
     <m-card icon="cc-menu-circle" title="图文攻略"></m-card>
   </div>
 </template>
 
 <script>
+import dayjs from 'dayjs'
+
 export default {
+  filters:{
+    dateShortCut(val){
+      return dayjs(val).format('MM/DD')
+    }
+  },
   data() {
     return {
       swiperOption: {
@@ -57,54 +74,28 @@ export default {
           el: ".pagination-home",
         },
       },
-      newsCates: [
-        {
-          name: "热门",
-          newsList: new Array(5).fill({}).map((val) => ({
-            categoryName: "公告",
-            title: "11月9日体验服专区维护公告",
-            date: "11/09",
-          })),
-        },
-        {
-          name: "新闻",
-          newsList: new Array(5).fill({}).map((val) => ({
-            categoryName: "新闻",
-            title: "11月9日体验服专区维护公告",
-            date: "11/09",
-          })),
-        },
-        {
-          name: "公告",
-          newsList: new Array(5).fill({}).map((val) => ({
-            categoryName: "公告",
-            title: "11月9日体验服专区维护公告",
-            date: "11/09",
-          })),
-        },
-        {
-          name: "活动",
-          newsList: new Array(5).fill({}).map((val) => ({
-            categoryName: "活动",
-            title: "11月9日体验服专区维护公告",
-            date: "11/09",
-          })),
-        },
-        {
-          name: "赛事",
-          newsList: new Array(5).fill({}).map((val) => ({
-            categoryName: "赛事",
-            title: "11月9日体验服专区维护公告",
-            date: "11/09",
-          })),
-        },
-      ],
+      newsCates: [],
+      heroCates: [],
       // iconItems:{
       //   name: ['爆料站','故事站','周边商城','体验服','新人专区'],
       //   class: ['']
       // }
     };
   },
+  methods:{
+    async fetchNewsCates(){
+      const res = await this.$http.get('news/list')
+      this.newsCates = res.data
+    },
+    async fetchHeroCates(){
+      const res = await this.$http.get('heroes/list')
+      this.heroCates = res.data
+    }
+  },
+  created(){
+    this.fetchNewsCates()
+    this.fetchHeroCates()
+  }
 };
 </script>
 

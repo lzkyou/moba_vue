@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import router from './router'
+import axios from 'axios'
 
 import App from './App.vue'
 import Card from 'components/Card.vue'
@@ -17,6 +18,10 @@ Vue.use(VueAwesomeSwiper)
 
 Vue.component('m-card',Card)
 Vue.component('m-list-card',ListCard)
+
+Vue.prototype.$http = axios.create({
+  baseURL: 'http://localhost:3000/web/api'
+})
 
 new Vue({
   router,
