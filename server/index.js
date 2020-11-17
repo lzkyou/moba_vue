@@ -8,6 +8,8 @@ app.use(require('cors')())
 //json文件分析Expressv4.16.0后内置
 app.use(express.json())
 //静态文件托管
+app.use('/', express.static(__dirname + '/web'))
+app.use('/admin', express.static(__dirname + '/admin'))
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
 require('./routes/admin')(app);
