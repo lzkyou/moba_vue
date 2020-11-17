@@ -1,10 +1,9 @@
-const { request } = require("express");
-
 const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
   name: String,
   avatar: String,
+  banner: String,
   title: String,
   categories: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Category' }],
   scores: {
@@ -16,6 +15,8 @@ const schema = new mongoose.Schema({
   skills: [{
     icon: { type: String },
     name: { type: String },
+    cd: { type: String },
+    mana: { type: String },
     description: { type: String },
     tips: { type: String },
   }],
@@ -24,10 +25,14 @@ const schema = new mongoose.Schema({
   usageTips: String,
   battleTips: String,
   teamTips: String,
-  parners: [{
+  partners: [{
     hero: { type: mongoose.SchemaTypes.ObjectId, ref: 'Hero' },
     description: String,
-  }]
+  }],
+  // beCounter: [{
+  //   hero: { type: mongoose.SchemaTypes.ObjectId, ref: 'Hero' },
+  //   description: String,
+  // }],
 })
 
 module.exports = mongoose.model('Hero', schema, 'heroes')

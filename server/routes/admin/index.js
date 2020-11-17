@@ -50,7 +50,7 @@ module.exports = app => {
   //CRUD通用接口，实现原理：
   //  1.通过:resource接收自定义参数(对应模型)
   //  2.编写中间件，将接收到自定义参数后通过infletion模块转换模型名称(转换成类名形式，首字母大写、去除复数)
-  //  3.将自定的接口地址发送给express.Router
+  //  3.将转换后的接口地址发送给express.Router
   app.use('/admin/api/rest/:resource', auth(), resource(), router)
 
   //图片上传接口 利用multer模块创建上传地址

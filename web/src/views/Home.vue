@@ -44,10 +44,10 @@
     <m-list-card icon="1590151135_1_" title="英雄列表" :categories="heroCates">
       <template #items="{ category }">
         <div class="flex flex-wrap" style="margin: 0 -.5rem">
-          <div class="p-2 text-center" style="width: 20%;" v-for="(item,index) in category.heroList" :key="index">
+          <router-link tag="div" :to="`heroes/${item._id}`" class="p-2 text-center" style="width: 20%;" v-for="(item,index) in category.heroList" :key="index">
             <img :src="item.avatar" class="w-100">
             <div>{{item.name}}</div>
-         </div>
+         </router-link>
         </div>
       </template>
     </m-list-card>

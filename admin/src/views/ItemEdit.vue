@@ -92,6 +92,7 @@ export default {
   text-align: center;
 }
 .avatar {
+  object-fit: contain;
   width: 178px;
   height: 178px;
   display: block;

@@ -2,14 +2,18 @@
 $colors:(
   'primary': #db9e3f,
   'dot': #4b67af,
+  'danger': rgb(175, 25, 25),
   'border': #d4d9de,
   'white': #fff,
+  'btn-bg': #fcfcfc,
+  'btn-bd': #eceef0,
   'light-grey': #f9f9f9,
   'grey': #999,
   'dark-grey': #666,
   'light-dark': #343440,
   'dark': #222,
   'black': #000,
+  
 );
 $border-color: map-get($colors , 'border' );
 

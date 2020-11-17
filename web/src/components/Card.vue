@@ -3,9 +3,9 @@
     <div class="card-header flex ai-center mb-3">
       <i class="iconfont" :class="`icon-${icon}`"></i>
       <div class="fs-xl pl-1 flex-1">{{title}}</div>
-      <i class="iconfont icon-menu fs-xxl"></i>
+      <i class="iconfont icon-menu fs-xxl" v-if="!plain"></i>
     </div>
-    <div class="card-body pt-3">
+    <div class="card-body pt-3" :class="{'bd-top': !plain}">
       <slot></slot>
     </div>
   </div>
@@ -22,6 +22,9 @@ export default {
       type: String,
       required: true
     },
+    plain:{
+      type: Boolean
+    }
   }
 };
 </script>
@@ -32,6 +35,6 @@ export default {
   border-bottom: 1px solid $border-color;
 }
 .card-body{
-  border-top: 1px solid $border-color;
+  // border-top: 1px solid $border-color;
 }
 </style>
