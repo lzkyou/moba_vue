@@ -16,6 +16,6 @@ require('./routes/admin')(app);
 require('./database/db')(app);
 require('./routes/web')(app);
 
-app.listen(3000,()=>{
-  console.log('listening on port 3000!');
+app.listen(3001,()=>{
+  console.log('listening on port 3001!');
 })

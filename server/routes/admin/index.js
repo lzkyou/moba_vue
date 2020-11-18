@@ -58,7 +58,7 @@ module.exports = app => {
   const upload = multer({ dest: __dirname + '/../../uploads' })
   app.post('/admin/api/upload',auth(), upload.single('file'), async (req, res) => {
     const file = req.file
-    file.url = `http://localhost:3000/uploads/${file.filename}`
+    file.url = `http://localhost:3001/uploads/${file.filename}`
     //直接返回图片的url到前端
     res.send(file.url)
   })
